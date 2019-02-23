@@ -215,6 +215,7 @@ void loop(){
 
 
   ///--- INICIO IF-TEMPERATURA-ALTA SEND SMS ---///
+	
  if(t > 32){
 	 
 	 		digitalWrite(porta_rele8, LOW);  //Liga rele 8 - Exautores
