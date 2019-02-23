@@ -324,15 +324,15 @@ void loop(){
 			SendSMSChoreo.setDeviceType(TEMBOO_DEVICE_TYPE);
 
 			// Set Choreo inputs
-			String AuthTokenValue = "c4075641efd3970125eb7710badac424";
+			String AuthTokenValue = "c4075111efd3970125eb7710baaac111";
 			SendSMSChoreo.addInput("AuthToken", AuthTokenValue);
-			String FromValue = "+13317012585";
+			String FromValue = "+1355554343";
 			SendSMSChoreo.addInput("From", FromValue);
-			String ToValue = "+5519983504100";
+			String ToValue = "+5519988554433";
 			SendSMSChoreo.addInput("To", ToValue);
 			String BodyValue = "Alarme! TEMPERATURA Alta no Rack 1 na fatec Mogi Mirim";
 			SendSMSChoreo.addInput("Body", BodyValue);
-			String AccountSIDValue = "ACe996cdad688c23ceb5d88055a9f3aba5";
+			String AccountSIDValue = "ACe999cdad688c23ceb5d11155a9aaaba5";
 			SendSMSChoreo.addInput("AccountSID", AccountSIDValue);
 
 			// Identify the Choreo to run
@@ -378,15 +378,15 @@ void loop(){
 			SendSMSChoreo.setDeviceType(TEMBOO_DEVICE_TYPE);
 
 			// Set Choreo inputs
-			String AuthTokenValue = "c4075641efd3970125eb7710badac424";
+			String AuthTokenValue = "c4075111efd3970125eb7710baaac111";
 			SendSMSChoreo.addInput("AuthToken", AuthTokenValue);
-			String FromValue = "+13317012585";
+			String FromValue = "+1355554343";
 			SendSMSChoreo.addInput("From", FromValue);
-			String ToValue = "+5519983504100";
+			String ToValue = "+5519988554433";
 			SendSMSChoreo.addInput("To", ToValue);
-			String BodyValue = "Alarme! FOGO Detectado no Rack 1 na fatec Mogi Mirim";
+			String BodyValue = "Alarme! TEMPERATURA Alta no Rack 1 na fatec Mogi Mirim";
 			SendSMSChoreo.addInput("Body", BodyValue);
-			String AccountSIDValue = "ACe996cdad688c23ceb5d88055a9f3aba5";
+			String AccountSIDValue = "ACe999cdad688c23ceb5d11155a9aaaba5";
 			SendSMSChoreo.addInput("AccountSID", AccountSIDValue);
 
 			// Identify the Choreo to run
@@ -421,15 +421,15 @@ void loop(){
 			SendSMSChoreo.setDeviceType(TEMBOO_DEVICE_TYPE);
 
 			// Set Choreo inputs
-			String AuthTokenValue = "c4075641efd3970125eb7710badac424";
+			String AuthTokenValue = "c4075111efd3970125eb7710baaac111";
 			SendSMSChoreo.addInput("AuthToken", AuthTokenValue);
-			String FromValue = "+13317012585";
+			String FromValue = "+1355554343";
 			SendSMSChoreo.addInput("From", FromValue);
-			String ToValue = "+5519983504100";
+			String ToValue = "+5519988554433";
 			SendSMSChoreo.addInput("To", ToValue);
 			String BodyValue = "Alarme! TEMPERATURA Alta no Rack 1 na fatec Mogi Mirim";
 			SendSMSChoreo.addInput("Body", BodyValue);
-			String AccountSIDValue = "ACe996cdad688c23ceb5d88055a9f3aba5";
+			String AccountSIDValue = "ACe999cdad688c23ceb5d11155a9aaaba5";
 			SendSMSChoreo.addInput("AccountSID", AccountSIDValue);
 
 			// Identify the Choreo to run

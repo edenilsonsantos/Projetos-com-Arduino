@@ -2,9 +2,9 @@
 #include <CayenneMQTTEthernet.h>
 
 // Cayenne authentication info. This should be obtained from the Cayenne Dashboard.
-char username[] = "5c717cd0-2ee5-11e8-9eaa-434cc97e08c2";
-char password[] = "a6552916ef91cb1f7039167ee321395e8dca7f77";
-char clientID[] = "e6f96b10-34e9-11e8-aa1d-e5677d2125ce";
+char username[] = "5c717cd0-2ee5-11e1-9eaa-444cc97e08c2";
+char password[] = "a6552916ef91cb1f70219167ee321395edca7f77";
+char clientID[] = "e6f96b10-e349-11e8-aa1d-e5677d2125ce";
 
 #define VIRTUAL_CHANNEL1 1 //sensor temp
 #define VIRTUAL_CHANNEL2 2 //sensor fogo

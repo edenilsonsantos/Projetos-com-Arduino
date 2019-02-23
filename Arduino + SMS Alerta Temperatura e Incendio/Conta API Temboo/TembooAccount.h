@@ -8,11 +8,11 @@ and copy this content into it.
 
 #define TEMBOO_ACCOUNT "santoeen"  // Your Temboo account name 
 #define TEMBOO_APP_KEY_NAME "myFirstApp"  // Your Temboo app key name
-#define TEMBOO_APP_KEY "wU34z3lNCgFuC3XJf8wdwrFlWRBvoPx2"  // Your Temboo app key
+#define TEMBOO_APP_KEY "wU34z3lNC333cC3XJf8wdwrFlWRBvoPx2"  // Your Temboo app key
 #define TEMBOO_DEVICE_TYPE "mega+w101"
 
 #define WIFI_SSID "Edenilson"
-#define WPA_PASSWORD "josenira"
+#define WPA_PASSWORD "1a2b3c4d"
 
 #if TEMBOO_LIBRARY_VERSION < 2
 #error "Your Temboo library is not up to date. You can update it using the Arduino library manager under Sketch > Include Library > Manage Libraries..."
