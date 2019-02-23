@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Arduino: Use Temboo and Twilio to send SMS messages from your Arduino</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="description" content="This tutorial will show you how to program your Arduino to send SMS messages using Temboo and the Twilio API."><meta name="viewport" content="initial-scale=1">
+	<link rel="shortcut icon" href="https://temboo.com/files/favicon.png" type="image/png"/>
+	
+	<meta property="og:title" content="Arduino: Use Temboo and Twilio to send SMS messages from your Arduino"/><meta property="og:type" content="website"/><meta property="og:image" content="https://temboo.com/files/temboo-drop-orange.png"/><meta property="og:url" content="https://temboo.com/arduino/others/send-sms/"/><meta property="og:description" content="The software toolkit that makes everyone stand taller. Tools for digital transformation, empowering everyone to innovate with IoT, APIs, and emerging tech."/>	
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700?v=3dd6a17
+"/>
+		<link rel="stylesheet" type="text/css" href="https://temboo.com/files/cms.css?v=3dd6a17
+"/>
+		<link rel="stylesheet" type="text/css" href="https://temboo.com/files/temboo.css?v=3dd6a17
+"/>
+		<link rel="stylesheet" type="text/css" href="https://temboo.com/files/temboo.widgets.css?v=3dd6a17
+"/>
+		<link rel="stylesheet" type="text/css" href="https://temboo.com/files/layout.css?v=3dd6a17
+"/>
+		<style>.pln{color:#333}.str{color:#090}.kwd{color:#03c}.com{color:#777}.typ{color:#d8297b}.lit{color:#090}.opn,.clo,.pun{color:#333}.tag{color:#036}.atn{color:#d8297b}.atv{color:#090}.dec{color:#03c}.var{color:#f47825}.fun{color:#333}pre.prettyprint{padding:10px;border:1px solid #ccc;font:12px "Open Sans",Arial,sans-serif;overflow-y:auto;max-height:300px}ol.linenums{margin-top:0;margin-bottom:0}li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8{list-style-type:none}li.L1,li.L3,li.L5,li.L7,li.L9{background:#eee}</style>
+		<link rel="stylesheet" type="text/css" href="https://temboo.com/files/tutorials.css?v=3dd6a17
+"/>
+	
+	<!--[if ie 8]><link rel="stylesheet" type="text/css" href="https://temboo.com/files/layout-ie8.css"><![endif]-->
+	<!--[if lt ie 8]><link rel="stylesheet" type="text/css" href="https://temboo.com/files/layout-ie7.css"><![endif]-->
+	
+	<script>var TEMBOO_CSRF_NAME="temboo_session_csrf";var TEMBOO_CSRF_HASH="f2acd7f6431cba2cc3158da77a1a30e0";</script>
+		<script type="text/javascript" src="/js/jquery-1.8.3.min.js,qv=3dd6a17.pagespeed.jm.0IhQ85x_cu.js"></script>
+		<script type="text/javascript" src="/js/ZeroClipboard.min.js,qv=3dd6a17.pagespeed.jm.Yh50-DXCEa.js"></script>
+		<script type="text/javascript" src="https://temboo.com/files/temboo.js?v=3dd6a17
+"></script>
+		<script type="text/javascript" src="https://temboo.com/files/common.js?v=3dd6a17
+"></script>
+		<script type="text/javascript" src="https://temboo.com/files/jquery.history.js?v=3dd6a17
+"></script>
+		<script type="text/javascript" src="https://temboo.com/files/jquery.jstree.js?v=3dd6a17
+"></script>
+		<script type="text/javascript" src="https://temboo.com/files/jquery.temboo.js?v=3dd6a17
+"></script>
+		<script type="text/javascript" src="https://temboo.com/files/temboo.classes.js?v=3dd6a17
+"></script>
+		<script type="text/javascript" src="https://temboo.com/files/temboo.messaging.js?v=3dd6a17
+"></script>
+		<script type="text/javascript" src="https://temboo.com/files/temboo.snippets.js?v=3dd6a17
+"></script>
+		<script type="text/javascript" src="https://temboo.com/files/temboo.widgets.js?v=3dd6a17
+"></script>
+		<script src="/js/prettify,_prettify.js,qv==3dd6a17+jquery.validate.js,qv==3dd6a17+jquery.cookie.js,qv==3dd6a17.pagespeed.jc.vt1U5gI34H.js"></script><script>eval(mod_pagespeed_7wOWD9cd7o);</script>
+		<script>eval(mod_pagespeed_a_bUqeWi8Y);</script>
+		<script>eval(mod_pagespeed_7HNmaAHrFZ);</script>
+		<script type="text/javascript" src="https://temboo.com/files/tutorials.js?v=3dd6a17
+"></script>
+	
+	<script type="text/javascript">$(function(){Temboo.setEnv('development-mode');});</script>
+
+	<script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-17339105-1']);_gaq.push(['_setDomainName','temboo.com']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();</script>
+	
+	
+</head>
+<body id="page-arduinoothers-page-arduinoothers-send-sms" class="temboo ">
+
+<noscript><div class="js-warning"><p>Sorry, Temboo requires JavaScript! Please enable it in your browser and try again.</p></div></noscript>
+
+<div id="loading-bar"></div>
+
+<div id="header-outer">
+	<div id="header-inner">
+		<div id="header">
+<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/'.concat(intercom_app_id);var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}
+if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+
+<!-- Matomo -->
+<script type="text/javascript">var _paq=_paq||[];_paq.push(["setDocumentTitle",document.domain+"/"+document.title]);_paq.push(["setCookieDomain","*.temboo.com"]);_paq.push(["setDomains",["*.temboo.com"]]);_paq.push(['trackPageView']);_paq.push(['enableLinkTracking']);(function(){var u="https://temboo.matomo.cloud/";_paq.push(['setTrackerUrl',u+'piwik.php']);_paq.push(['setSiteId','1']);var d=document,g=d.createElement('script'),s=d.getElementsByTagName('script')[0];g.type='text/javascript';g.async=true;g.defer=true;g.src='//cdn.matomo.cloud/temboo.matomo.cloud/piwik.js';s.parentNode.insertBefore(g,s);})();</script>
+<!-- End Matomo Code -->
+
+<div id="logo"><a href="/" target="_parent"><script pagespeed_no_defer="" type="text/javascript">//<![CDATA[
+(function(){var g=this,h=function(b,d){var a=b.split("."),c=g;a[0]in c||!c.execScript||c.execScript("var "+a[0]);for(var e;a.length&&(e=a.shift());)a.length||void 0===d?c[e]?c=c[e]:c=c[e]={}:c[e]=d};var l=function(b){var d=b.length;if(0<d){for(var a=Array(d),c=0;c<d;c++)a[c]=b[c];return a}return[]};var m=function(b){var d=window;if(d.addEventListener)d.addEventListener("load",b,!1);else if(d.attachEvent)d.attachEvent("onload",b);else{var a=d.onload;d.onload=function(){b.call(this);a&&a.call(this)}}};var n,p=function(b,d,a,c,e){this.f=b;this.h=d;this.i=a;this.c=e;this.e={height:window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight,width:window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth};this.g=c;this.b={};this.a=[];this.d={}},q=function(b,d){var a,c,e=d.getAttribute("pagespeed_url_hash");if(a=e&&!(e in b.d))if(0>=d.offsetWidth&&0>=d.offsetHeight)a=!1;else{c=d.getBoundingClientRect();var f=document.body;a=c.top+("pageYOffset"in window?window.pageYOffset:(document.documentElement||f.parentNode||f).scrollTop);c=c.left+("pageXOffset"in window?window.pageXOffset:(document.documentElement||f.parentNode||f).scrollLeft);f=a.toString()+","+c;b.b.hasOwnProperty(f)?a=!1:(b.b[f]=!0,a=a<=b.e.height&&c<=b.e.width)}a&&(b.a.push(e),b.d[e]=!0)};p.prototype.checkImageForCriticality=function(b){b.getBoundingClientRect&&q(this,b)};h("pagespeed.CriticalImages.checkImageForCriticality",function(b){n.checkImageForCriticality(b)});h("pagespeed.CriticalImages.checkCriticalImages",function(){r(n)});var r=function(b){b.b={};for(var d=["IMG","INPUT"],a=[],c=0;c<d.length;++c)a=a.concat(l(document.getElementsByTagName(d[c])));if(0!=a.length&&a[0].getBoundingClientRect){for(c=0;d=a[c];++c)q(b,d);a="oh="+b.i;b.c&&(a+="&n="+b.c);if(d=0!=b.a.length)for(a+="&ci="+encodeURIComponent(b.a[0]),c=1;c<b.a.length;++c){var e=","+encodeURIComponent(b.a[c]);131072>=a.length+e.length&&(a+=e)}b.g&&(e="&rd="+encodeURIComponent(JSON.stringify(s())),131072>=a.length+e.length&&(a+=e),d=!0);t=a;if(d){c=b.f;b=b.h;var f;if(window.XMLHttpRequest)f=new XMLHttpRequest;else if(window.ActiveXObject)try{f=new ActiveXObject("Msxml2.XMLHTTP")}catch(k){try{f=new ActiveXObject("Microsoft.XMLHTTP")}catch(u){}}f&&(f.open("POST",c+(-1==c.indexOf("?")?"?":"&")+"url="+encodeURIComponent(b)),f.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),f.send(a))}}},s=function(){var b={},d=document.getElementsByTagName("IMG");if(0==d.length)return{};var a=d[0];if(!("naturalWidth"in a&&"naturalHeight"in a))return{};for(var c=0;a=d[c];++c){var e=a.getAttribute("pagespeed_url_hash");e&&(!(e in b)&&0<a.width&&0<a.height&&0<a.naturalWidth&&0<a.naturalHeight||e in b&&a.width>=b[e].k&&a.height>=b[e].j)&&(b[e]={rw:a.width,rh:a.height,ow:a.naturalWidth,oh:a.naturalHeight})}return b},t="";h("pagespeed.CriticalImages.getBeaconData",function(){return t});h("pagespeed.CriticalImages.Run",function(b,d,a,c,e,f){var k=new p(b,d,a,e,f);n=k;c&&m(function(){window.setTimeout(function(){r(k)},0)})});})();pagespeed.CriticalImages.Run('/mod_pagespeed_beacon','https://temboo.com/arduino/others/send-sms','TSPFXcmHZO',true,false,'b9dezjlxpu0');
+//]]></script><img src="/assets/temboo_header_logo.png" alt="Temboo" pagespeed_url_hash="3881507772" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"/></a></div>
+<div id="navigation" class="logged-out">
+	<div id="nav-links">
+
+		<div class="callout-container product">
+			<span id="navigation_documentation" class="nav-link">PRODUCT</span>
+			<div class="hover-container">
+				<div class="callout shadow">
+					<div class="arrow top"></div>
+					<div class="subnav logged-out" id="product">
+						<div class="sub-container left">
+							<h3 class="nav-item">
+								Innovate with the<br> Temboo Toolkit
+							</h3>
+							<a href="/library" class="subnav">
+							<div class="nav-item">
+								<div class="icon" id="code-gen"></div>
+								<div class="link-container">
+									<div class="link-title">
+										Code Generation
+									</div>
+									<div class="link-description">
+										Connect to any API in any language on any device
+									</div>
+								</div>
+							</div></a>
+							<a href="/iotapps">
+							<div class="nav-item">
+								<div class="icon" id="iot"></div>
+								<div class="link-container">
+									<div class="link-title">
+										IoT Apps
+									</div>
+									<div class="link-description">
+										Pre-built IoT applications for different industries
+									</div>
+								</div>
+							</div></a>
+						</div>
+						<div class="sub-container right">
+							<a href="/platform">
+							<div class="nav-item">
+								<div class="icon" id="platform"></div>
+								<div class="link-container">
+									<div class="link-title">
+										Platform
+									</div>
+									<div class="link-description">
+									        Technologies Temboo combines and streamlines
+									</div>
+								</div>
+							</div></a>
+							<a href="/digital-transformation">
+							<div class="nav-item">
+								<div class="icon" id="digital"></div>
+								<div class="link-container">
+									<div class="link-title">
+										Digital Transformation
+									</div>
+									<div class="link-description">
+										Enable your entire organization to stand taller
+									</div>
+								</div>
+							</div></a>
+							<a href="/manufacturing">
+							<div class="nav-item">
+								<div class="icon" id="manufacturing"></div>
+								<div class="link-container">
+									<div class="link-title">
+										Manufacturing
+									</div>
+									<div class="link-description">
+										Upgrade existing equipment with IoT capabilities
+									</div>
+								</div>
+							</div></a>
+						</div>
+						<hr/>
+						<div class="bottom-container">
+							<a href="/pricing">Learn about our plans</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="callout-container documentation">
+			<span id="navigation_documentation" class="nav-link">Docs</span>
+			<div class="hover-container">
+				<div class="callout shadow">
+					<div class="arrow top"></div>
+					<ul class="subnav">
+						<a href="/docs">
+							<li class="quickstart">
+								<div class="sdk-icon"></div>
+								<div class="sdk-text">Quickstarts</div>
+							</li>
+						</a>
+						<hr/>
+						<a href="/arduino">
+							<li class="arduino">
+								<div class="sdk-icon"></div>
+								<div class="sdk-text">Arduino</div>
+							</li>
+						</a>
+						<a href="/hardware/samsung">
+							<li class="samsung">
+								<div class="sdk-icon"></div>
+								<div class="sdk-text">Samsung ARTIK</div>
+							</li>
+						</a>
+						<a href="/hardware/ti">
+							<li class="ti">
+								<div class="sdk-icon"></div>
+								<div class="sdk-text">Texas Instruments</div>
+							</li>
+						</a>
+						<hr/>
+						<div class="language-col left">
+							<a href="/android">
+								<li class="android">
+									<div class="sdk-icon"></div>
+									<div class="sdk-text">Android</div>
+								</li>
+							</a>
+							<a href="/csharp">
+								<li class="csharp">
+									<div class="sdk-icon"></div>
+									<div class="sdk-text">C#</div>
+								</li>
+							</a>
+							<a href="/ios">
+								<li class="ios">
+									<div class="sdk-icon"></div>
+									<div class="sdk-text">iOS</div>
+								</li>
+							</a>
+							<a href="/java">
+								<li class="java">
+									<div class="sdk-icon"></div>
+									<div class="sdk-text">Java</div>
+								</li>
+							</a>
+							<a href="/javascript">
+								<li class="javascript">
+									<div class="sdk-icon"></div>
+									<div class="sdk-text">JavaScript</div>
+								</li>
+							</a>
+							<a href="/nodejs">
+								<li class="nodejs">
+									<div class="sdk-icon"></div>
+									<div class="sdk-text">Node.js</div>
+								</li>
+							</a>
+						</div>
+							<div class="language-col right">
+							<a href="/php">
+								<li class="php">
+									<div class="sdk-icon"></div>
+									<div class="sdk-text">PHP</div>
+								</li>
+							</a>
+							<a href="/processing">
+								<li class="processing">
+									<div class="sdk-icon"></div>
+									<div class="sdk-text">Processing</div>
+								</li>
+							</a>
+							<a href="/python">
+								<li class="python">
+									<div class="sdk-icon"></div>
+									<div class="sdk-text">Python</div>
+								</li>
+							</a>
+							<a href="/restapi">
+								<li class="rest_json">
+									<div class="sdk-icon"></div>
+									<div class="sdk-text">REST API</div>
+								</li>
+							</a>
+							<a href="/ruby">
+								<li class="ruby">
+									<div class="sdk-icon"></div>
+									<div class="sdk-text">Ruby</div>
+								</li>
+							</a>
+						</div>
+						<hr/>
+						<a href="/videos">
+							<li class="videos">
+								<div class="sdk-icon"></div>
+								<div class="sdk-text">Watch videos to help you build</div>
+							</li>
+						</a>
+						<a href="/support">
+							<li class="support">
+								<div class="sdk-icon"></div>
+								<div class="sdk-text">Need help getting started?</div>
+							</li>
+						</a>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="callout-container company">
+			<span id="navigation_documentation" class="nav-link">COMPANY</span>
+			<div class="hover-container">
+				<div class="callout shadow">
+					<div class="arrow top"></div>
+					<ul class="subnav">
+						<a href="/about">
+							<li class="about">
+								<div class="sdk-icon"></div>
+								<div class="sdk-text">About</div>
+							</li>
+						</a>
+						<a href="/case-studies">
+							<li class="case-studies">
+								<div class="sdk-icon"></div>
+								<div class="sdk-text">Case Studies</div>
+							</li>
+						</a>
+						<a href="/jobs">
+							<li class="jobs">
+								<div class="sdk-icon"></div>
+								<div class="sdk-text">Jobs</div>
+							</li>
+						</a>
+						<a href="/blog">
+							<li class="praise">
+								<div class="sdk-icon"></div>
+								<div class="sdk-text">News</div>
+							</li>
+						</a>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="callout-container login">
+    		<a id="navigation_login" class="login-link nav-link" href="">log in</a>
+    		<div class="hover-container">
+	    		<div class="callout shadow">
+	        		<div class="arrow top"></div>
+	        		<div id="old-login-lightbox">
+	        		<h3 class="title">Welcome back!</h3>
+	        		<div class="password-success-message"></div>
+	            		<div class="old-login">
+	                		<form name="old-login" action="/session/authenticate/" method="POST">
+	                    		<input type="text" name="username" id="username" placeholder="Account name or email address"/>
+	                    		<input type="password" name="password" id="password" placeholder="Password"/>
+	                    		<div class="forgot-container">
+	                        		<a id="forgot" class="body" tabindex="-1" href="">Forgot your password?</a>
+	                    		</div>
+	                    		<div class="spinner-container">
+	                        		<button class="button xlarge green" type="submit">Log in</button>
+	                        		<div class="spinner center"></div>
+	                    		</div>
+	                		</form>
+	            		</div>
+	        		</div>
+	        		<div id="old-forgot">
+	            		<h3 class="title">Forgot your password?</h3>
+	            		<form name="old-forgot" action="/session/passwordResetRequest/" method="POST">
+	                		<input type="text" name="username" id="forgot_username" placeholder="Account name or email address"/>
+	               			<div class="buttons spinner-container">
+	                   			<button id="forgot_cancel" class="button white customCancel" name="customCancel" type="button">Cancel</button>
+	                   			<button id="forgot_submit" class="button submit" name="submit" type="submit">Submit</button>
+	                   			<div class="spinner right"></div>
+	               			</div>
+	           			</form>
+	       			</div>
+	    		</div>
+			</div>
+		</div>
+		<a id="sign-up" class="nav-link button white-text" href="/" target="_parent">SIGN UP</a>
+	</div>
+</div>
+
+ 
+		</div>
+	</div>
+</div>
+
+
+<!-- Intercom -->
+<script>var intercom_app_id="xcmwnku6"
+window.intercomSettings={app_id:intercom_app_id};</script>
+
+
+<!-- Facebook Pixel -->
+<script>var pixel_app_id="129736841144243"
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',pixel_app_id);fbq('track','PageView');</script>
+
+<!-- Google AdWords -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-1016034764"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','AW-1016034764');</script>
+
+<!-- Cookie Notice -->
+<div class="block" id="cookie-notice">
+    <div class="cookie-notice-inner">
+        <span><div class="icon"></div> The Temboo website uses cookies. By navigating on our website you agree to our use of cookies and our privacy policy.</span>
+        <div class="links">
+            <a id="cookie-consent-button" class="button small">Got It</a> <a href='/privacy' target="_blank" id="cookie-learn-more">learn more</a>
+        </div>
+    </div>
+</div><div class="twitter-link">
+	<a href="https://twitter.com/share" class="twitter-share-button" data-text="I'm #programming my @arduino with @temboo, and you should too!" data-count="none">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');</script>
+</div><div id="tutorials" class="sdk arduino">
+  <div class="box">
+
+  <!-- content -->
+
+<h1 class="titleLarge">Your Arduino can send SMS on demand</h1>
+
+<hr/>
+
+<p>We'll show you how to get your Arduino to send SMS with Twilio, so your Arduino can text whenever it's running late.</p>
+
+<p>This sketch uses our <a href="/library/Library/Twilio/SMSMessages/SendSMS/" target="_blank">Twilio > SMSMessages > SendSMS</a> Choreo.
+
+<h3 class="subtitle">Get Set Up</h3>
+
+<p class="num-body"><span class="ord">1</span>Make sure you have a Temboo account. If you don't already have one, you can <a href="/signup" target="_blank">register for free</a>.</p>
+
+<p class="num-body"><span class="ord">2</span>Next, make sure that you've got the latest version the <a href="http://arduino.cc/en/main/software" target="_blank">Arduino IDE</a> installed. You should also check that you have the newest version of the Temboo Library by checking the <a href="https://www.arduino.cc/en/Guide/Libraries#toc3" target="_blank">Arduino Library Manager</a></p>
+
+<p class="num-body"><span class="ord">3</span>You'll also need a Twilio account, which you can create for free <a href="https://www.twilio.com" target="_blank">here</a>.</p>
+
+<p class="num-body"><span class="ord">4</span>You'll need to supply your Twilio phone number, along with the <strong>Account SID</strong> and <strong>Auth Token</strong> you get when you register with Twilio. Make sure to use the Account SID and Auth Token from your <a href="https://www.twilio.com/console" target="_blank">Twilio Console Dashboard</a>, shown below, as opposed to the test credentials from the Dev Tools panel.</p>
+
+<p class="num-body"><img src="/assets/arduino-screen-twiliodashboard.png" alt="Twilio Console Dashboard" pagespeed_url_hash="249591696" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"/></p>
+<p class="num-body"><em>A Twilio Account SID and Auth Token in the Twilio Console Dashboard</em></p>
+
+<p class="num-body"><span class="ord">5</span>When using a free Twilio account, you'll need to verify the phone number to which messages are being sent by going to <a href="https://www.twilio.com" target="_blank">Twilio</a> and following the instructions under the "Numbers > Verified Caller IDs" tab.</p>
+
+<h3 class="subtitle">Auto-Generate the Sketch</h3>
+
+<p class="num-body"><span class="ord">6</span>Go to the <a href="/library/Library/Twilio/SMSMessages/SendSMS/" target="_blank">Twilio > SMSMessages > SendSMS</a> Choreo in our Library.</p>
+
+<p class="num-body"><span class="ord">7</span>Select <strong>Arduino</strong> from the drop down menu at the top of the Choreo page, then choose your Arduino device. Make sure that you've added details about how your Arduino will connect to the internet.</p>
+
+<p class="num-body"><img src="/assets/arduino-other-screen-select-language.png" alt="Selecting your Arduino configuration" pagespeed_url_hash="92908058" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"></p>
+
+<p class="num-body"><span class="ord">8</span>Click <strong>Generate Code</strong> to test out the Choreo from our website and confirm that you can send an SMS to your own phone.</p>
+
+<p class="num-body"><img src="/assets/arduino-screen-twilio-test.png" alt="Example inputs to the Twilio Send SMS Choreo" pagespeed_url_hash="3845062055" onload="pagespeed.CriticalImages.checkImageForCriticality(this);"/></p>
+<p class="num-body"><em>Testing the SendSMS Choreo from our website</em></p>
+
+<p class="num-body"><span class="ord">9</span>When you've confirmed that the Choreo runs successfully and you've received an SMS, you can copy the auto-generated Arduino code from the <code>Code</code> section and paste it into your Arduino IDE.</p>
+
+<p class="num-body"><span class="ord">10</span>The auto-generated sketch references the <code>TembooAccount.h</code> header file, which contains your Temboo account information and internet shield details. You'll find the code for this file beneath your generated sketch. Create a new tab in the Arduino IDE called <code>TembooAccount.h</code> and copy in the header file information.</p> 
+
+<h3 class="subtitle">Run The Sketch</h3>
+
+<p class="num-body"><span class="ord">11</span>With both files in place you are ready to upload the sketch and start sending SMS from your Arduino. Text away!</p>
+
+<p><strong>Note</strong>: If you run into problems with this example, it could be that Twilio doesn't yet support sending SMS from your country. Here's a <a href="https://www.twilio.com/help/faq/phone-numbers/which-countries-does-twilio-have-phone-numbers-in-and-what-are-their-capabilities" target="_blank">full list</a> of the countries they currently have SMS support for.</p>
+
+<h3 class="subtitle">What's Next?</h3>
+<p>Now that you've mastered SMS, why not check out the rest of the 2000+ Choreos in our <a href="/library">Library</a> and start planning your next Arduino project.</p>
+
+<h3 class="subtitle">Need Help?</h3>
+<p>We're always happy to help. Just email us at <a href="mailto:support@temboo.com?subject=Arduino%20Twilio%20Send%20SMS%20Example">support@temboo.com</a>, and we'll answer your questions.</p>
+
+<hr/>
+
+<p>
+  <a href="/arduino/others/" class="button large nav-back"><span class="nav-icon"></span> Back</a>
+</p>
+
+<!-- /content -->
+
+<div class="bottom clr"></div>
+</div>
+</div><div id="footer-outer"><div id="footer-inner"><div id="footer">
+	<div class="footer-link"><a href="/library">Code Gen</a></div>
+<div class="footer-link"><a href="/devices">Devices</a></div>
+<div class="footer-link"><a href="/pricing">Pricing</a></div>
+<div class="footer-link"><a href="/support">Support</a></div>
+<div class="footer-link"><a href="/blog">Blog</a></div>
+<div class="footer-link"><a href="/contact">Contact</a></div>
+
+<p class="follow">
+<a class="follow-icon" id="footer-youtube" href="https://www.youtube.com/temboo" target="_blank"></a>
+<a class="follow-icon" id="footer-youtube-hover" href="https://www.youtube.com/temboo" target="_blank"></a>
+<a class="follow-icon" id="footer-linkedin" href="https://www.linkedin.com/company/temboo-inc-" target="_blank"></a>
+<a class="follow-icon" id="footer-linkedin-hover" href="https://www.linkedin.com/company/temboo-inc-" target="_blank"></a>
+<a class="follow-icon" id="footer-twitter" href="https://twitter.com/temboo" target="_blank"></a>
+<a class="follow-icon" id="footer-twitter-hover" href="https://twitter.com/temboo" target="_blank"></a>
+<a class="follow-icon" id="footer-instagram" href="https://www.instagram.com/temboo_iot/" target="_blank"></a>
+<a class="follow-icon" id="footer-instagram-hover" href="https://www.instagram.com/temboo_iot/" target="_blank"></a>
+<a class="follow-icon" id="footer-facebook" href="https://www.facebook.com/temboo" target="_blank"></a>
+<a class="follow-icon" id="footer-facebook-hover" href="https://www.facebook.com/temboo" target="_blank"></a>
+</p>
+
+<p class="copyright">
+&copy; 2019 Temboo, Inc
+<a id="footer-privacy" href="/privacy">Privacy</a>
+<a id="footer-terms" href="/terms">Terms</a>
+</p>
+
+	<div class="clr"></div>
+</div></div></div>
+
+<script type="text/javascript">$(function(){$('form').append('<input type="hidden" name="temboo_session_csrf" value="f2acd7f6431cba2cc3158da77a1a30e0" />');});$(function(){$('body').append('<style>body { }</style>');});</script>
+</body>
+</html>
