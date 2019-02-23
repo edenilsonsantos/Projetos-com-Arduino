@@ -15,6 +15,6 @@
 
 // aciona rele, que liga kit 4 exaustores no teto do rack
 
-// aciona alarme sonoro no local.
+// aciona alarme sonoro no local
 
 
